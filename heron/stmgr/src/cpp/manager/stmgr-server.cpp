@@ -254,7 +254,7 @@ void StMgrServer::HandleTupleStreamMessage(Connection* _conn,
     }
     stmgr_->HandleStreamManagerData(iter->second, _message);
   }
-   release(_message);
+  release(_message);
 }
 
 void StMgrServer::HandleRegisterInstanceRequest(REQID _reqid, Connection* _conn,
@@ -329,7 +329,8 @@ void StMgrServer::HandleRegisterInstanceRequest(REQID _reqid, Connection* _conn,
   delete _request;
 }
 
-void StMgrServer::HandleTupleSetMessage(Connection* _conn, proto::system::HeronTupleSet2* _message) {
+void StMgrServer::HandleTupleSetMessage(Connection* _conn,
+                                        proto::system::HeronTupleSet2* _message) {
   ConnectionTaskIdMap::iterator iter = active_instances_.find(_conn);
   if (iter == active_instances_.end()) {
     LOG(ERROR) << "Received TupleSet from unknown instance connection. Dropping.." << std::endl;
@@ -384,7 +385,8 @@ void StMgrServer::SendToInstance(sp_int32 _task_id, const proto::stmgr::TupleMes
   }
 }
 
-void StMgrServer::SendToInstance2(sp_int32 _task_id, const proto::system::HeronTupleSet2& _message) {
+void StMgrServer::SendToInstance2(sp_int32 _task_id,
+                                  const proto::system::HeronTupleSet2& _message) {
   bool drop = false;
   TaskIdInstanceDataMap::iterator iter = instance_info_.find(_task_id);
   if (iter == instance_info_.end() || iter->second->conn_ == NULL) {
