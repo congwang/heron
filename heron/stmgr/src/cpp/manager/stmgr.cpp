@@ -381,8 +381,7 @@ void StMgr::NewPhysicalPlan(proto::system::PhysicalPlan* _pplan) {
 }
 
 void StMgr::CleanupStreamConsumers() {
-  std::map<std::pair<sp_string, sp_string>, StreamConsumers*>::iterator iter;
-  for (iter = stream_consumers_.begin(); iter != stream_consumers_.end(); ++iter) {
+  for (auto iter = stream_consumers_.begin(); iter != stream_consumers_.end(); ++iter) {
     delete iter->second;
   }
   stream_consumers_.clear();
