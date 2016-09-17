@@ -241,6 +241,7 @@ void StMgrServer::HandleTupleStreamMessage(Connection* _conn,
   ConnectionStreamManagerMap::iterator iter = rstmgrs_.find(_conn);
   if (iter == rstmgrs_.end()) {
     LOG(INFO) << "Recieved Tuple messages from unknown streammanager connection" << std::endl;
+  } else {
     stmgr_->HandleStreamManagerData(iter->second, *_message);
   }
   release(_message);
